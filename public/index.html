@@ -1,0 +1,106 @@
+<html bgcolor="black">
+<script src="jquery-3.2.1.js"></script>
+<script src="particles.js"></script>
+<script language="JavaScript">
+particlesJS.load('particles-js', 'particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
+var message = $('textarea#jan').val();
+$("#com").click(function(){
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.1.91:4444/Router",
+  "method": "POST",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "processData": false,
+  "data": '{"command" :"' + $('textarea#jan').val() + '"}'
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  $('textarea#res').val(response);
+});
+});
+</script>
+<head bgcolor="black">
+        <title>API Debug tool</title>
+        <style>
+            body{
+                font-family: verdana;
+                margin: 20px;
+                background-color: black;
+            }
+            h1{
+                margin: 0px;
+                font-size: 20px;
+            }
+            h2{
+                font-size: 16px;
+                margin-top: 20px;
+                color: black;
+            }
+            #buttons{
+                clear: left;
+            }
+            input{
+                width: 100%;
+            }
+            form{
+                background: #7DBDD1;
+                width: 500px;
+                padding: 20px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+            }
+            #jan{
+                background: gray;
+                color: green;
+                padding-top: 10px;
+                width: 100%;
+                font-family: monaco,monospace;
+                font-size: 30px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+            } 
+            #res{
+                background: gray;
+                color: white;
+                padding-top: 10px;
+                width: 100%;
+                font-family: monaco,monospace;
+                font-size: 12px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+            }
+            canvas {
+            display:block;
+            
+            position: fixed;
+            z-index: -1;
+            }
+        </style>
+    </head>
+
+    <body bgcolor="black">
+    <div id="particles-js">
+     </div>
+        <center><form style="display: block;" name="commandform">
+            <h1>TM reverse shell</h1>
+            
+            <h2>Command:</h2>
+            <textarea name="messagebody" id="jan" rows="10" cols="100"></textarea>
+            <h2>Response...</h2>
+            <textarea name="response" id="res" rows="15" cols="100"></textarea>
+            <div id="buttons">
+                <button id="com" type="button">POST</button>
+            </div>
+        </form></center>
+       
+    
+
+
+
+</body></html>
